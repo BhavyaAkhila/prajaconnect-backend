@@ -76,10 +76,20 @@ public class WebSecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("https://prajaconnect.netlify.app", "http://localhost:3000", "http://localhost:3001", "http://localhost:5173"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        // Development URLs
+        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+        // Production URLs (uncomment and update when deployed)
+        // configuration.setAllowedOrigins(Arrays.asList(
+        //     "https://your-frontend-domain.netlify.app",
+        //     "https://your-frontend-domain.vercel.app",
+        //     "http://localhost:3000",
+        //     "http://localhost:3001",
+        //     "http://localhost:5173"
+        // ));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "PATCH"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
