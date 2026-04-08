@@ -1,8 +1,14 @@
 FROM amazoncorretto:17
 
+# Install required tools for Maven wrapper
+RUN apt-get update && apt-get install -y tar gzip && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 COPY . .
+
+# Ensure mvnw has executable permissions
+RUN chmod +x mvnw
 
 RUN ./mvnw clean package -DskipTests
 
