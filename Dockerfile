@@ -1,7 +1,9 @@
-FROM openjdk:17-jdk
+FROM ubuntu:22.04
 
-# Install required tools for Maven wrapper
-RUN apt-get update && apt-get install -y tar gzip && rm -rf /var/lib/apt/lists/*
+# Install Java 17 and required tools
+RUN apt-get update && \
+    apt-get install -y openjdk-17-jdk tar gzip && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
