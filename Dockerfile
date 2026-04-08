@@ -1,4 +1,4 @@
-FROM amazoncorretto:17
+FROM openjdk:17-jdk
 
 # Install required tools for Maven wrapper
 RUN apt-get update && apt-get install -y tar gzip && rm -rf /var/lib/apt/lists/*
